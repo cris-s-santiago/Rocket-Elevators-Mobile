@@ -27,6 +27,8 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": "The Mobile application will allow teams in the field to interact with the Rocket Elevators information system, so it can only be accessed by employees. ",
+    "githubUrl": "https://github.com/cris-s-santiago/Rocket-Elevators-Mobile.git"
   }
 }

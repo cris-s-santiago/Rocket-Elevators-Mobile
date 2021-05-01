@@ -12,26 +12,26 @@ import imagemElevator from "../assets/elevator.jpg"
 
 const LoginScreen = ({ navigation }) => {
 
-    const [textInputEmail, setTextInputEmail] = useState({ value: '', error: '' });
-    console.log(textInputEmail);
+    const [textInputEmail, setTextInputEmail] = useState({ value: '', error: '' }); //Variable that receives the value of the input
     
     async function checkEmail(){
-        if (!validator.isEmail(textInputEmail)) {
+        if (!validator.isEmail(textInputEmail) || textInputEmail == " ") {   //Validates whether the input is empty and whether the email is valid
             Toast.show('Please insert a valide email!', Toast.SHORT);
             return;
-        }        
-        return await axios.get(`https://rocket-elevator-mobile.herokuapp.com/api/Employees/${textInputEmail}`)
+        }
+        // Call API for check if the e-mail is belongs to the employee, return true or false.        
+        return await axios.get(`https://rocket-elevator-mobile.herokuapp.com/api/Employees/${textInputEmail}`) 
             .then(function (res) {
                 const response = res.data;
                 if (response == true) {
                 navigation.reset({
                         index: 0,
-                        routes: [{ name: 'Home' }],
+                        routes: [{ name: 'Home' }], //If the response is true, go to home page
                         })
                 }
                 else{
+                    //If the response is false, you receive this message
                     Toast.show(`${textInputEmail} is unavailable, please insert a valide email and try again!`, Toast.SHORT);
-                    console.log(textInputEmail);
                 }
             })
             .catch(function (error) {  
@@ -49,13 +49,13 @@ const LoginScreen = ({ navigation }) => {
                     label="Email"
                     returnKeyType="next"
                     value = {textInputEmail.value}
-                    onChangeText={(value) => setTextInputEmail(value)}
+                    onChangeText={(value) => setTextInputEmail(value)} //Pass the value to the const textInputEmail
                     autoCapitalize="none"
                     autoCompleteType="email"
                     keyboardType="email-address"
                     required
                 />
-                <Button mode="contained" onPress={checkEmail}>
+                <Button mode="contained" onPress={checkEmail}> {/* //Calls the method to check the email with the API */}
                     Login
                 </Button>                
             </ContainerStyle>

@@ -11,9 +11,11 @@ import TextRed from '../assets/components/TextRed';
 
 
 function ElevatorScreen({ navigation, route }) {
+  //Saves the id and status values you receive at the time the page is called
   const id = route.params.id;
   var status = route.params.status;
 
+  //Method for changing the status of an elevator
   async function changeStatus() {
     return await axios.put("https://rocket-elevator-mobile.herokuapp.com/api/elevators/"+id+"/Status",{ id: id, status: "active"})
       .then(res => {
@@ -24,6 +26,7 @@ function ElevatorScreen({ navigation, route }) {
       });
   }
 
+  //Method for check the status of an elevator
   async function checkStatus(){      
     return await axios.get(`https://rocket-elevator-mobile.herokuapp.com/api/Elevators/${id}`)
       .then(function (res) {
@@ -35,6 +38,7 @@ function ElevatorScreen({ navigation, route }) {
       });
   }
 
+  //If the status is active, shows the button to return to the home screen
   if (status == "active"){
     return (
       <ContainerStyle>
@@ -49,6 +53,7 @@ function ElevatorScreen({ navigation, route }) {
           </View>        
       </ContainerStyle>    
     )
+  //If the status is not active, it shows the button for changing the status
   }else {
     return (
     <ContainerStyle>
@@ -58,9 +63,9 @@ function ElevatorScreen({ navigation, route }) {
         <TextRed> Status : {status}</TextRed>
         <ButtonContainer
           onPress={ async () => { 
-              await changeStatus();
-              const Elevator = await checkStatus();
-              navigation.navigate('ElevatorStatus', {id: Elevator.id, status: Elevator.status,})
+              await changeStatus(); //Calls the method to change the status
+              const Elevator = await checkStatus(); //Calls the check the status
+              navigation.navigate('ElevatorStatus', {id: Elevator.id, status: Elevator.status,}) //Renders the page again, passing in the new status and id values.
           }}>
           <ButtonText>Change status to Active</ButtonText>
         </ButtonContainer>

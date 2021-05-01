@@ -1,9 +1,9 @@
 import React from 'react'
-import MainStackNavigator from './navi/MainStackNavigator'
+import MainNavigator from './navi/MainNavigator'
 
-//call MainStackNavigator
+//call MainNavigator - Page controller
 export default function App() {
   return (
-    <MainStackNavigator />
+    <MainNavigator />
   )
 }

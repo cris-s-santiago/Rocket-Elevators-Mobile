@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     color: 'red',
     textAlign: 'center',
     fontSize: 24,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
 })
 
